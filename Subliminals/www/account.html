@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+
+<html lang="en" >
+	<!-- begin::Head -->
+	<head>
+		<meta charset="utf-8" />
+		<title>
+			Account Overview
+		</title>
+		<meta name="description" content="Latest updates and statistic charts">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<!--begin::Web font -->
+		<script type="text/javascript" src="assets/webfont.js"></script>
+		<script>
+          WebFont.load({
+            google: {"families":["Poppins:300,400,500,600,700","Roboto:300,400,500,600,700"]},
+            active: function() {
+                sessionStorage.fonts = true;
+            }
+          });
+		</script>
+		<!--end::Web font -->
+		<!--begin::Base Styles -->
+		<link href="assets/vendors.bundle.css"  rel="stylesheet" type="text/css" />
+		<link href="assets/style.bundle.css"  rel="stylesheet" type="text/css" />
+		<link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+		<!--end::Base Styles -->
+	</head>
+	<!-- end::Head -->
+	<!-- end::Body -->
+	<body class="m-page--fluid m--skin- m-content--skin-light2 m-header--fixed m-header--fixed-mobile m-aside-left--enabled m-aside-left--skin-dark m-aside-left--offcanvas m-footer--push m-aside--offcanvas-default"  >
+		<!-- begin:: Page -->
+		<div class="m-grid m-grid--hor m-grid--root m-page">
+			<!-- BEGIN: Header -->
+			<header class="m-grid__item    m-header "  data-minimize-mobile="hide" data-minimize-offset="200" data-minimize-mobile-offset="200" data-minimize="minimize" >
+				<div class="m-container m-container--fluid m-container--full-height">
+					<div class="m-stack m-stack--ver m-stack--desktop">
+						<!-- BEGIN: Brand -->
+						<div class="m-stack__item m-brand  m-brand--skin-dark ">
+							<div class="m-stack m-stack--ver m-stack--general">
+								<div class="m-stack__item m-stack__item--middle m-brand__logo">
+									<a href="account.html" class="m-brand__logo-wrapper">
+										<img alt="" src="images/logo.png" width="200px"/>
+									</a>
+								</div>
+								<div class="m-stack__item m-stack__item--middle m-brand__tools">
+									<!-- BEGIN: Left Aside Minimize Toggle -->
+									<a href="javascript:;" id="m_aside_left_minimize_toggle" class="m-brand__icon m-brand__toggler m-brand__toggler--left m--visible-desktop-inline-block 
+					 ">
+										<span></span>
+									</a>
+									<!-- END -->
+									<!-- BEGIN: Responsive Aside Left Menu Toggler -->
+									<a href="javascript:;" id="m_aside_left_offcanvas_toggle" class="m-brand__icon m-brand__toggler m-brand__toggler--left m--visible-tablet-and-mobile-inline-block">
+										<span></span>
+									</a>
+									<!-- END -->
+									<!-- BEGIN: Responsive Header Menu Toggler -->
+									<a id="m_aside_header_menu_mobile_toggle" href="javascript:;" class="m-brand__icon m-brand__toggler m--visible-tablet-and-mobile-inline-block">
+										<span></span>
+									</a>
+									<!-- END -->
+									<!-- BEGIN: Topbar Toggler -->
+									<a id="m_aside_header_topbar_mobile_toggle" href="javascript:;" class="m-brand__icon m--visible-tablet-and-mobile-inline-block">
+										<i class="flaticon-more"></i>
+									</a>
+									<!-- BEGIN: Topbar Toggler -->
+								</div>
+							</div>
+						</div>
+						<!-- END: Brand -->
+						<div class="m-stack__item m-stack__item--fluid m-header-head" id="m_header_nav">
+							<!-- BEGIN: Horizontal Menu -->
+							<div id="m_header_menu" class="m-header-menu m-aside-header-menu-mobile m-aside-header-menu-mobile--offcanvas  m-header-menu--skin-light m-header-menu--submenu-skin-light m-aside-header-menu-mobile--skin-dark m-aside-header-menu-mobile--submenu-skin-dark "  >
+								<ul class="m-menu__nav  m-menu__nav--submenu-arrow ">
+
+
+									<li class="m-menu__item  m-menu__item--submenu m-menu__item--rel"  >
+										<a  href="gallery.html" class="m-menu__link ">
+											<i class="m-menu__link-icon flaticon-paper-plane"></i>
+											<span class="m-menu__link-title">
+												<span class="m-menu__link-wrap">
+													<span class="m-menu__link-text">
+														Start Listening
+													</span>
+													<span class="m-menu__link-badge">
+														<span class="m-badge m-badge--brand m-badge--wide">
+															
+														</span>
+													</span>
+												</span>
+											</span>
+											<i class="m-menu__hor-arrow la la-angle-down"></i>
+											<i class="m-menu__ver-arrow la la-angle-right"></i>
+										</a>
+										<div class="m-menu__submenu m-menu__submenu--classic m-menu__submenu--left">
+											<span class="m-menu__arrow m-menu__arrow--adjust"></span>
+										</div>
+									</li>
+								</ul>
+							</div>
+							<!-- END: Horizontal Menu -->
+							<!-- BEGIN: Topbar -->
+							<div id="m_header_topbar" class="m-topbar  m-stack m-stack--ver m-stack--general">
+								<div class="m-stack__item m-topbar__nav-wrapper">
+									<ul class="m-topbar__nav m-nav m-nav--inline">
+
+										<li class="m-nav__item m-topbar__notifications m-topbar__notifications--img m-dropdown m-dropdown--large m-dropdown--header-bg-fill m-dropdown--arrow m-dropdown--align-center 	m-dropdown--mobile-full-width" >
+											<a href="#" class="m-nav__link m-dropdown__toggle" id="m_topbar_notification_icon">
+												<span class="m-nav__link-badge m-badge m-badge--dot m-badge--dot-small m-badge--danger"></span>
+												<span class="m-nav__link-icon">
+													<i class="flaticon-music-2"></i>
+												</span>
+											</a>
+										</li>
+										<li class="m-nav__item m-topbar__quick-actions m-topbar__quick-actions--img m-dropdown m-dropdown--large m-dropdown--header-bg-fill m-dropdown--arrow m-dropdown--align-right m-dropdown--align-push m-dropdown--mobile-full-width m-dropdown--skin-light" >
+											<a href="#" class="m-nav__link m-dropdown__toggle">
+												<span class="m-nav__link-badge m-badge m-badge--dot m-badge--info m--hide"></span>
+												<span class="m-nav__link-icon">
+													<i class="flaticon-share"></i>
+												</span>
+											</a>
+										</li>
+										
+									</ul>
+								</div>
+							</div>
+							<!-- END: Topbar -->
+						</div>
+					</div>
+				</div>
+			</header>
+			<!-- END: Header -->
+			<!-- begin::Body -->
+			<div class="m-grid__item m-grid__item--fluid m-grid m-grid--ver-desktop m-grid--desktop m-body">
+				<!-- BEGIN: Left Aside -->
+				<div id="m_aside_left" class="m-grid__item	m-aside-left  m-aside-left--skin-dark ">
+					<!-- BEGIN: Aside Menu -->
+					<div 
+		id="m_ver_menu" 
+		class="m-aside-menu  m-aside-menu--skin-dark m-aside-menu--submenu-skin-dark " 
+		data-menu-vertical="true"
+		 data-menu-scrollable="false" data-menu-dropdown-timeout="500"  
+		>
+						<ul class="m-menu__nav  m-menu__nav--dropdown-submenu-arrow ">
+							<li class="m-menu__item  m-menu__item--active" aria-haspopup="true" >
+								<a  href="account.html" class="m-menu__link ">
+									<i class="m-menu__link-icon fa fa-user"></i>
+									<span class="m-menu__link-title">
+										<span class="m-menu__link-wrap">
+											<span class="m-menu__link-text">
+												Account Overview
+											</span>
+
+										</span>
+									</span>
+								</a>
+							</li>
+							<li class="m-menu__section">
+								<h4 class="m-menu__section-text">
+									Menu
+								</h4>
+								<i class="m-menu__section-icon flaticon-more-v3"></i>
+							</li>
+							<li class="m-menu__item  m-menu__item--submenu" aria-haspopup="true"  data-menu-submenu-toggle="hover">
+								<a  href="pricing.html" class="m-menu__link m-menu__toggle">
+									<i class="m-menu__link-icon fa fa-plus-square"></i>
+									<span class="m-menu__link-text">
+										Upgrade to premium
+									</span>
+									<i class="m-menu__ver-arrow la la-angle-right"></i>
+								</a>
+							</li>
+							<li class="m-menu__item  m-menu__item--submenu" aria-haspopup="true"  data-menu-submenu-toggle="hover">
+								<a  href="edit-profile.html" class="m-menu__link m-menu__toggle">
+									<i class="m-menu__link-icon fa fa-edit"></i>
+									<span class="m-menu__link-text">
+										Edit Profile
+									</span>
+									<i class="m-menu__ver-arrow la la-angle-right"></i>
+								</a>
+							</li>
+							<li class="m-menu__item  m-menu__item--submenu" aria-haspopup="true"  data-menu-submenu-toggle="hover">
+								<a  href="edit-password.html" class="m-menu__link m-menu__toggle">
+									<i class="m-menu__link-icon fa fa-lock"></i>
+									<span class="m-menu__link-text">
+										Change Password
+									</span>
+									<i class="m-menu__ver-arrow la la-angle-right"></i>
+								</a>
+							</li>
+							<li class="m-menu__item  m-menu__item--submenu" aria-haspopup="true"  data-menu-submenu-toggle="hover">
+								<a  href="notification-settings.html" class="m-menu__link m-menu__toggle">
+									<i class="m-menu__link-icon fa fa-bell"></i>
+									<span class="m-menu__link-text">
+										Notification Settings
+									</span>
+									<i class="m-menu__ver-arrow la la-angle-right"></i>
+								</a>
+							</li>
+							<li class="m-menu__item  m-menu__item--submenu" aria-haspopup="true"  data-menu-submenu-toggle="hover">
+								<a  href="recover-playlist.html" class="m-menu__link m-menu__toggle">
+									<i class="m-menu__link-icon fa fa-refresh"></i>
+									<span class="m-menu__link-text">
+										Recover Playlists
+									</span>
+									<i class="m-menu__ver-arrow la la-angle-right"></i>
+								</a>
+							</li>
+							<li class="m-menu__item  m-menu__item--submenu" aria-haspopup="true"  data-menu-submenu-toggle="hover">
+								<a  href="" class="m-menu__link m-menu__toggle">
+									<i class="m-menu__link-icon fa fa-credit-card"></i>
+									<span class="m-menu__link-text">
+										Subscription
+									</span>
+									<i class="m-menu__ver-arrow la la-angle-right"></i>
+								</a>
+							</li>
+							<li class="m-menu__item  m-menu__item--submenu" aria-haspopup="true"  data-menu-submenu-toggle="hover">
+								<a  href="transactions.html" class="m-menu__link m-menu__toggle">
+									<i class="m-menu__link-icon fa fa-exchange"></i>
+									<span class="m-menu__link-text">
+										Transactions
+									</span>
+									<i class="m-menu__ver-arrow la la-angle-right"></i>
+								</a>
+							</li>
+							<!--<li class="m-menu__item  m-menu__item--submenu" aria-haspopup="true"  data-menu-submenu-toggle="hover">
+								<a  href="{{route('app.download')}}" class="m-menu__link m-menu__toggle">
+									<i class="m-menu__link-icon fa fa-windows"></i>
+									<span class="m-menu__link-text">
+										Download App
+									</span>
+									<i class="m-menu__ver-arrow la la-angle-right"></i>
+								</a>
+							</li>-->
+							<li class="m-menu__item  m-menu__item--submenu" aria-haspopup="true"  data-menu-submenu-toggle="hover">
+								<a  href="login.html" class="m-menu__link m-menu__toggle">
+									<i class="m-menu__link-icon fa fa-sign-out"></i>
+									<span class="m-menu__link-text">
+										Logout
+									</span>
+									<i class="m-menu__ver-arrow la la-angle-right"></i>
+								</a>
+							</li>
+
+							
+						</ul>
+					</div>
+					<!-- END: Aside Menu -->
+				</div>
+				<!-- END: Left Aside -->
+				<div class="m-grid__item m-grid__item--fluid m-wrapper">
+					<!-- BEGIN: Subheader -->
+					<div class="m-subheader ">
+						<div class="d-flex align-items-center">
+							<div class="mr-auto">
+								<h3 class="m-subheader__title ">
+                                     Account Overview
+								</h3>
+							</div>
+							<div>
+							<!--	<span class="m-subheader__daterange" id="m_dashboard_daterangepicker">
+									<span class="m-subheader__daterange-label">
+										<span class="m-subheader__daterange-title"></span>
+										<span class="m-subheader__daterange-date m--font-brand"></span>
+									</span>
+									<a href="#" class="btn btn-sm btn-brand m-btn m-btn--icon m-btn--icon-only m-btn--custom m-btn--pill">
+										<i class="la la-angle-down"></i>
+									</a>
+								</span> -->
+								<a class="btn btn-info btn-circular" href="gallery.html">Start Listening &nbsp;<i class="fa fa-play"></i> </a>
+							</div>
+						</div>
+					</div>
+					<!-- END: Subheader -->
+					<div class="m-content">
+						<!--Begin::Main Portlet-->
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <!-- /.row -->
+            <!-- .row -->
+            <div class="row">
+                <div class="col-xs-12">
+                        <ul class="nav nav-tabs tabs">
+
+                            <li class="active tab" style="width: 40% !important;">
+                                <a href="#profile" data-toggle="tab"> <span class="visible-xs"><i class="fa fa-user"></i></span> <span class="hidden-xs">Profile</span> </a>
+                            </li>
+                           
+                            <li class="tab" style="width: 40% !important;">
+                                <a href="#settings" data-toggle="tab" aria-expanded="false"> <span class="visible-xs"><i class="fa fa-cog"></i></span> <span class="hidden-xs">Settings</span> </a>
+                            </li>
+                        </ul>
+                        <div class="tab-content">
+
+                            <div class="tab-pane active" id="profile">
+                                <div class="row">
+                                    <div class="col-md-6 col-xs-12 b-r">
+                                        <hr>
+                                        <strong>Username</strong>
+                                        <br>
+                                        <p class="text-muted"></p>
+                                    </div>
+                                    <div class="col-md-6 col-xs-12 b-r">
+                                        <hr>
+                                        <strong>Full Name</strong>
+                                        <br>
+                                        <p class="text-muted"></p>
+                                    </div>
+                                    <div class="col-md-6 col-xs-12 b-r">
+                                        <hr>
+                                        <strong>Mobile</strong>
+                                        <br>
+                                        <p class="text-muted">
+                                            
+                                    </div>
+                                    <div class="col-md-6 col-xs-12 b-r">
+                                        <hr>
+                                        <strong>Email</strong>
+                                        <br>
+                                        <p class="text-muted">email value</p>
+                                    </div>
+                                    <div class="col-md-6 col-xs-12">
+                                        <hr>
+                                        <strong>Country</strong>
+                                        <br>
+                                        <p class="text-muted">country value</p>
+                                        </p>
+                                    </div>
+                                    <div class="col-md-6 col-xs-12">
+                                        <hr>
+                                        <strong>Postal Code</strong>
+                                        <br>
+                                        <p class="text-muted">Postal code</p>
+                                    </div>
+                                    <hr>
+                                    <div class="col-md-12 col-xs-12">
+                                        <hr>
+                                        <strong>About me </strong>
+                                        <br>
+                                        <p class="text-muted">bio here </p>
+                                    </div>
+                                </div>
+                                <hr>
+
+
+                            </div>
+
+                            <div class="tab-pane " id="settings">
+                                <div class="col-xs-12 col-md-12">
+                                
+                                <form class="form-horizontal form-material">
+                                    <div class="form-group">
+                                       
+                                        <label class="col-md-12">Full Name</label>
+                                        <div class="col-md-12">
+                                            <input type="text" placeholder="Johnathan Doe" class="form-control form-control-line" name="full_name" value=""> </div>
+                                    </div>
+                                    <div class="form-group">
+                                        
+                                        <label class="col-md-12">Username</label>
+                                        <div class="col-md-12">
+                                            <input type="text" placeholder="Johnathan Doe" class="form-control form-control-line" name="username" value""> </div>
+                                    </div>
+                                    <div class="form-group">
+
+                                        <label for="example-email" class="col-md-12">Email</label>
+                                        <div class="col-md-12">
+                                            <input type="email" placeholder="johnathan@admin.com" class="form-control form-control-line" name="email" id="example-email" value=""> </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        
+                                        <label for="example-email" class="col-md-12">Date of Birth</label>
+                                        <div class="col-md-12">
+                                            <input type="date" placeholder="" class="form-control form-control-line" name="date_of_birth" id="example-email" value=""> </div>
+                                    </div>
+
+                                    <div class="form-group">
+
+                                        <label class="col-md-12">Phone No</label>
+                                        <div class="col-md-12">
+                                            <input type="text" placeholder="123 456 7890" class="form-control form-control-line" name="phone" value=""> </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-12">Something about you</label>
+                                        <div class="col-md-12">
+                                            <textarea rows="5" class="form-control form-control-line" name="bio" ></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-12">Select Country</label>
+                                        <div class="col-sm-12">
+                                            <select class="form-control form-control-line" name="country">
+                                                <option>USA</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-12">Postal Code</label>
+                                        <div class="col-md-12">
+                                            <input type="text" placeholder="123 456" class="form-control form-control-line" name="postal_code" value=""> </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-12">
+                                            <button class="btn btn-success" type="submit">Update Profile</button>
+                                        </div>
+                                    </div>
+                                </form>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+            </div>
+            <!-- /.row -->
+            <!-- ============================================================== -->
+
+
+						<!--End::Main Portlet-->
+					</div>
+				</div>
+			</div>
+			<!-- end:: Body -->
+			<!-- begin::Footer -->
+			<footer class="m-grid__item		m-footer ">
+				<div class="m-container m-container--fluid m-container--full-height m-page__container">
+					<div class="m-stack m-stack--flex-tablet-and-mobile m-stack--ver m-stack--desktop">
+						<div class="m-stack__item m-stack__item--left m-stack__item--middle m-stack__item--last">
+							<span class="m-footer__copyright">
+								2017 &copy; Subliminals | Developed by CoderCrew
+							</span>
+						</div>
+						
+					</div>
+				</div>
+			</footer>
+			<!-- end::Footer -->
+		</div>
+			
+		<!-- end:: Page -->
+		<!-- begin::Quick Sidebar -->
+
+		<!-- end::Quick Sidebar -->
+		<!-- begin::Scroll Top -->
+
+		<!-- end::Scroll Top -->
+		<!-- begin::Quick Nav -->
+
+			<!--
+			<li class="m-nav-sticky__item" data-toggle="m-tooltip" title="Showcase" data-placement="left">
+				<a href="">
+					<i class="la la-eye"></i>
+				</a>
+			</li>
+			<li class="m-nav-sticky__item" data-toggle="m-tooltip" title="Pre-sale Chat" data-placement="left">
+				<a href="" >
+					<i class="la la-comments-o"></i>
+				</a>
+			</li>
+			-->
+
+			
+		<!-- begin::Quick Nav -->
+		<!--begin::Base Scripts -->
+		<script src="assets/vendors.bundle.js" type="text/javascript"></script>
+		<script src="assets/scripts.bundle.js" type="text/javascript"></script>
+		<!--end::Base Scripts -->
+		<!--begin::Page Snippets -->
+		<script src="assets/dashboard.js" type="text/javascript"></script>
+		<!--end::Page Snippets -->
+
+	</body>
+
+	<!-- end::Body -->
+</html>

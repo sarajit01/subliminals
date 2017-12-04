@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="webPlayer">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Web Player | Subliminals</title>
+    <!-- Bootstrap Core CSS -->
+    <link href="assets/bootstrap.min.css" rel="stylesheet">
+    <!-- Menu CSS -->
+    <link href="assets/sidebar-nav.min.css" rel="stylesheet">
+    <!-- toast CSS -->
+  
+ 
+    <!-- animation CSS -->
+    <link href="assets/animate.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <!-- color CSS -->
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <!--<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style type="text/css">
+        .jq-toast-wrap {
+            visibility: hidden;
+        }
+    </style>
+
+</head>
+
+<body class="fix-header" ng-controller="audioController" ng-cloak >
+<!-- ============================================================== -->
+<!-- Preloader -->
+<!-- ============================================================== -->
+
+
+<!-- ============================================================== -->
+<!-- Wrapper -->
+<!-- ============================================================== -->
+<div id="wrapper" >
+    <!-- ============================================================== -->
+    <!-- Topbar header - style you can find in pages.scss -->
+    <!-- ============================================================== -->
+    <nav class="navbar navbar-default navbar-static-top m-b-0">
+        <div class="navbar-header">
+            <div class="top-left-part" style="background-color: #ccc;">
+                <!-- Logo -->
+                <a class="logo" href="{{route('user.account.dashboard')}}">
+                    <!-- Logo icon image, you can use font-icon also --><b>
+                        <!--This is dark logo icon--><img src="{{asset('assets/home/rsz_1subliminals_8.png')}}" alt="home" class="dark-logo" /><!--This is light logo icon--><img src="{{asset('assets/home/rsz_1subliminals_8.png')}}" alt="home" class="light-logo" />
+                    </b>
+                    <!-- Logo text image you can use text also --><span class="hidden-xs">
+                        <!--This is dark logo text--><img src="{{asset('assets/home/logo-right.png')}}" alt="home" class="dark-logo" /><!--This is light logo text--><img src="{{asset('assets/home/logo-right.png')}}" alt="home" class="light-logo" />
+                     </span> </a>
+            </div>
+            <!-- /Logo -->
+            <!-- Search input and Toggle icon -->
+            <ul class="nav navbar-top-links navbar-left">
+                <li><a href="javascript:void(0)" class="open-close waves-effect waves-light"><i class="ti-menu"></i></a></li>
+               
+
+            </ul>
+            <ul class="nav navbar-top-links navbar-right pull-right">
+                  <li ng-if="audioListAppeared === true || myplaylistAppeared === true">
+                      <a href="#" ng-click="backToAlbum()"><i class="fa fa-arrow-left"></i>&nbsp;Back to albums </a>
+                  </li>
+
+                <!-- /.dropdown -->
+            </ul>
+        </div>
+        <!-- /.navbar-header -->
+        <!-- /.navbar-top-links -->
+        <!-- /.navbar-static-side -->
+    </nav>
+    <!-- End Top Navigation -->
+    <!-- ============================================================== -->
+    <!-- Left Sidebar - style you can find in sidebar.scss  -->
+    <!-- ============================================================== -->
+    <div class="navbar-default sidebar" role="navigation">
+        <div class="sidebar-nav slimscrollsidebar">
+            <div class="sidebar-head">
+                <h3><span class="fa-fw open-close"><i class="ti-close ti-menu"></i></span> <span class="hide-menu">Navigation</span></h3> </div>
+            <div class="user-profile">
+                <div class="dropdown user-pro-body">
+                    <div><img src="https://image.flaticon.com/icons/svg/149/149071.svg" alt="user-img" class="img-circle"></div>
+                    <a href="#" class="dropdown-toggle u-dropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Username <span class="caret"></span></a>
+                    <ul class="dropdown-menu animated flipInY">
+                        <li><a target="_blank" href="{{route('user.account.dashboard')}}"><i class="ti-user"></i> My Profile</a></li>
+
+                        <li role="separator" class="divider"></li>
+                        <li><a target="_blank" href="{{route('user.account.profile.edit')}}"><i class="ti-settings"></i> Account Setting</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="{{route('user.logout')}}"><i class="fa fa-power-off"></i> Logout</a></li>
+                    </ul>
+                </div>
+            </div>
+            <ul class="nav" id="side-menu">
+
+                <li> <a target="_blank" href="{{route('user.account.dashboard')}}" class="waves-effect"><i class="fa fa-user" data-icon="v"></i> <span class="hide-menu">&nbsp; My Account  </span></a>
+
+                </li>
+                <li> <a href="" ng-click="backToAlbum()" class="waves-effect"><i class="fa fa-home" data-icon="v"></i> <span class="hide-menu">&nbsp; Home </span></a>
+
+                </li>
+                <li> <a href="" ng-click="getMyPlayList()" class="waves-effect"><i class="fa fa-play" data-icon="v" ></i> <span class="hide-menu">&nbsp; My Playlist  </span></a>
+
+
+
+
+            </ul>
+            <center>
+                <button class="btn btn-default btn-rounded btn-lg download-app">Download App &nbsp;<i class="fa fa-arrow-down"></i> </button>
+            </center>
+        </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Left Sidebar -->
+    <!-- Page Content -->
+    <!-- ============================================================== -->
+    
+    <div id="page-wrapper">
+        <div class="container-fluid" id="gallery-container">
+            
+            <!-- /.row -->
+            <div class="row" ng-init="getAlbums('{{route('disk.albums.get')}}')">
+                <div class="white-box" id="album-showcase">
+                    <ul class="nav nav-tabs tabs customtab" id="gallery-options">
+
+                        <li class="active tab">
+                            <a href="#general" data-toggle="tab" aria-expanded="false"> <span class="visible-xs"><i class="fa fa-cog"></i></span> <span class="hidden-xs">General</span> </a>
+                        </li>
+                        <li class=" tab">
+                            <a href="#settings" data-toggle="tab" aria-expanded="false"> <span class="visible-xs"><i class="fa fa-cog"></i></span> <span class="hidden-xs">Recently Played</span> </a>
+                        </li> <li class=" tab">
+                            <a href="#settings" data-toggle="tab" aria-expanded="false"> <span class="visible-xs"><i class="fa fa-cog"></i></span> <span class="hidden-xs">Featured</span> </a>
+                        </li> <li class=" tab">
+                            <a href="#settings" data-toggle="tab" aria-expanded="false"> <span class="visible-xs"><i class="fa fa-cog"></i></span> <span class="hidden-xs">New Releases</span> </a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+
+
+
+                        <div class="tab-pane active" id="general">
+
+                            <center ng-if="progress === true">
+                                <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+                            </center>
+                               <div ng-if="progress === false" ng-repeat="x in albums track by $index">
+                               <div class="col-md-2 col-lg-2 col-sm-3 col-xs-6 album">
+                                   <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 album-avatar">
+                                       <img src="{{url('storage/app')}}/@{{x.album_image}}" alt="gallery" class="img img-responsive"  ng-click="appearAudioList(x.id,'{{route('disk.album.audios.get')}}','{{route('disk.album.get.details')}}')" ng-if="x.album_image !== null "/>
+                                       <img src="{{asset('assets/music-2297759_960_720.png')}}" alt="gallery" class="img img-responsive"  ng-click="appearAudioList(x.id,'{{route('disk.album.audios.get')}}','{{route('disk.album.get.details')}}')" ng-if="x.album_image === null "/>
+                                   </div>
+                                   <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12 album-title text-center">
+                                       <p>@{{x.album_title}}</p>
+                                   </div>
+                               </div>
+                                   
+                               </div>
+                          
+
+
+
+
+
+
+
+                        </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                <div class="white-box" id="audio-showcase">
+                    
+                    <div class="col-md-3 col-lg-3 col-sm-3 col-xs-12 album-avatar">
+                        <img src='{{url('storage/app')}}/@{{albumDetails.album_image}}' alt="gallery" class="img img-responsive" ng-if="albumDetails.album_image !== null ">
+                        <img src='{{asset('assets/music-2297759_960_720.png')}}' alt="gallery" class="img img-responsive" ng-if="albumDetails.album_image === null ">
+                        <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+
+                            <h2 class="text-center">@{{albumDetails.album_title}}</h2>
+                        </div>
+                        <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+
+                            <h4 class="text-center">@{{albumDetails.album_category}}</h4>
+                        </div>
+                        <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+                             <center>
+                                 <button class="btn btn-success btn-lg btn-rounded shadow-depth-2" id="play-album" ng-click="playAlbum('@{{albumDetails.id}}')"><span ng-if="play === false && currentAlbum.id === albumDetails.id  "><i class="fa fa-play" ></i>&nbsp; Play</span><span ng-if="play === true && currentAlbum.id === albumDetails.id"><i class="fa fa-pause" ></i>&nbsp; Pause</span><span ng-if="currentAlbum.id !== albumDetails.id  "><i class="fa fa-play" ></i>&nbsp; Play</span></button>
+                             </center>
+                        </div>
+                    </div>
+                    <div class="col-md-9 col-lg-9 col-sm-9 col-xs-12 audio-list-empty shadow-depth-2">
+                        <h2 style="color: #fff !important;">No audio found in this album</h2>
+                    </div>
+                    <div class="col-md-9 col-lg-9 col-sm-9 col-xs-12 audio-list-container shadow-depth-2">
+                           <div class="audio-list-item col-md-12 col-lg-12 col-sm-12 col-xs-12" ng-repeat="x in audioList track by $index" ng-mouseover="currentSelection($index)" ng-click="selectAudio(x)">
+                               <div class="col-md-1 col-lg-1 col-sm-1 col-xs-2 text-center" >
+                                   <h4 ng-if="selectedHover === $index && currentAudioId !== x.id ">
+                                       <i class="fa fa-play"></i>
+                                       </h4>
+                                   <h4 ng-if="currentAudioId === x.id && play === false">
+                                       <i class="fa fa-play"></i>
+                                   </h4>
+                                   <h4 ng-if="currentAudioId === x.id && play === true" >
+                                       <i class="fa fa-pause"></i>
+                                   </h4>
+                                   <h4 ng-if="selectedHover !== $index &&  currentAudioId !== x.id">
+
+                                   @{{$index +1}}.</h4>
+                               </div>
+                               <div class="col-md-10 col-lg-9 col-sm-9 col-xs-9 audio-title" >
+                                   <h4>@{{x.audio_title}}  </h4>
+                                   <p class="hidden-xs">@{{x.writer_name}} , @{{x.audio_title}}</p>
+                               </div>
+                               <div class="col-md-2 col-lg-2 col-sm-2">
+                                   <br/>
+                                   <h4 class="hidden-xs">@{{x.duration}}</h4>
+                                   <span class="hidden-md hidden-lg hidden-sm text-right">@{{x.duration}}</span>
+                               </div>
+                               <div class="col-md-12 col-lg-12 col-xs-12 col-sm-12">
+                                   <p style="color: #0bb8c9 !important;">Description : @{{x.audio_desc}}</p>
+                               </div>
+                           </div>
+
+
+                    </div>
+
+
+
+                </div>
+                <div class="white-box" id="myplaylist-showcase" ng-if="myplaylistAppeared === true ">
+
+
+
+                    <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12  shadow-depth-2">
+                        
+                        <div class="audio-list-item col-md-12 col-lg-12 col-sm-12 col-xs-12" ng-repeat="x in audioList track by $index" ng-mouseover="currentSelection($index)" ng-click="playFavorite(x)">
+                            <div class="col-md-1 col-lg-1 col-sm-1 col-xs-2 text-center" >
+                                <h4 ng-if="selectedHover === $index && currentAudioId !== x.id " style="color: #fff !important;">
+                                    <i class="fa fa-play"></i>
+                                </h4>
+                                <h4 ng-if="currentAudioId === x.id && play === false" style="color: #fff !important;">
+                                    <i class="fa fa-play"></i>
+                                </h4>
+                                <h4 ng-if="currentAudioId === x.id && play === true" style="color: #fff !important;">
+                                    <i class="fa fa-pause"></i>
+                                </h4>
+                                <h4 ng-if="selectedHover !== $index &&  currentAudioId !== x.id" style="color: #fff !important;">
+
+                                    @{{$index +1}}.</h4>
+                            </div>
+                            <div class="col-md-10 col-lg-9 col-sm-9 col-xs-9 audio-title" style="color: #fff !important;" >
+                                <h4 style="color: #fff !important;">@{{x.audio_title}}  </h4>
+                                <p class="hidden-xs" style="color: #fff !important;">@{{x.writer_name}} , @{{x.audio_title}}</p>
+                            </div>
+                            <div class="col-md-2 col-lg-2 col-sm-2" style="color: #fff !important ;">
+                                <br/>
+                                <h4 class="hidden-xs" style="color: #fff !important;">@{{x.duration}}</h4>
+                                <span class="hidden-md hidden-lg hidden-sm text-right" style="color: #fff !important;">@{{x.duration}}</span>
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+
+
+                </div>
+
+            </div>
+            <!-- .row -->
+
+
+
+
+
+
+          <div class="row">
+              <div class="player__container col-md-12 col-lg-12 col-sm-12 col-xs-12 navbar-fixed-bottom">
+                  <div class="player__body col-md-12 col-lg-12 col-sm-12 col-xs-12">
+                      <div class="body__cover hidden-md hidden-lg hidden-sm hidden-xs">
+                          <ul class="list list--cover">
+                              <li>
+                                  <a class="list__link" href=""><i class="fa fa-navicon"></i></a>
+                              </li>
+
+                              <li>
+                                  <a class="list__link" href=""></a>
+                              </li>
+
+                              <li>
+                                  <a class="list__link" href=""><i class="fa fa-search"></i></a>
+                              </li>
+                          </ul>
+
+                          <img src="http://ecx.images-amazon.com/images/I/51XSHShbPiL.jpg" alt="Album cover" />
+
+
+                      </div>
+                      <div class="col-md-1 col-lg-1 hidden-xs" style="padding-top: 10px;">
+                          <center>
+                              <img src='{{url('storage/app')}}/@{{currentAudioImgSrc}}' class="img-responsive">
+                          </center>
+                          
+                      </div>
+                      <div class="body__info col-md-3 col-lg-3">
+
+                          <div class="info__album hidden-xs">@{{currentAudioAlbum}}</div>
+
+                          <div class="info__song">@{{currentAudioTitle}}</div>
+
+                          <div class="info__artist hidden-xs">@{{currentAudioWriter}}</div>
+                      </div>
+
+                      <div class="body__buttons col-md-4 col-lg-4">
+                         <center>
+                             <input type="range" ng-model="range" class="range-slider__range" ng-change="changeRange()" />      </center>
+                          <center style="padding-top: 10px;" id="loading-indicator">
+                               <span  style="text-align: center">
+                              <i class="fa fa-refresh fa-spin" style="color: #fff !important; " > </i> &nbsp;Loading ....
+                          </span>
+                          </center>
+
+
+
+                          <ul class="list list--buttons">
+                              <li><a href="" style="border: none!important;font-size: large;" ng-click="prevPlay()" class="list__link control-key" ><i class="fa fa-step-backward"></i></a></li>
+
+                              <li><a href="" class="list__link control-key" ng-click="resumeOrPauseAudioPlayer()" ><i class="fa fa-play" ng-if="play === false || play === undefined"></i><i class="fa fa-pause" ng-if="play === true " ></i></a></li>
+
+                              <li><a href="" style="border: none!important;font-size: large;" ng-click="nextPlay()" class="list__link control-key" ><i class="fa fa-step-forward"></i></a></li>
+                          </ul>
+                      </div>
+                      <div class="player__footer col-md-4 col-lg-4 col-sm-4 col-xs-12">
+                          <ul class="list list--footer">
+                              <li><a href="#" class="list__link"><i class="fa fa-heart-o" ng-click="addToPlayList('{{route('user.add.audio')}}',currentAudioId,'alert')"></i></a></li>
+
+                              <li ng-if="minVol !== true"><a href=""   ng-click="volumeDown()" class="list__link"><i class="fa fa-volume-down"></i></a></li>
+
+                              <li ng-if="minVol === true"><a href=""   ng-click="volumeUp()" class="list__link"><i class="fa fa-volume-off"></i></a></li>
+
+                              <li><a href="" ng-click="volumeUp()" class="list__link"><i class="fa fa-volume-up"></i></a></li>
+
+                              <li><a href="#" class="list__link"><i class="fa fa-random"></i></a></li>
+
+                              <li><a href="" ng-click="repeatAudio()" class="list__link"><i class="fa fa-undo"></i></a></li>
+
+                              <li><a href="#" class="list__link"><i class="fa fa-ellipsis-h" ng-click="getMyPlayList()"></i></a></li>
+                          </ul>
+                      </div>
+
+
+                  </div>
+
+              </div>
+
+          </div>
+
+               
+
+               
+            
+        </div>
+
+          
+
+
+        <style type="text/css">
+            html {
+                font-size: 16px;
+                background: #e4f2fb;
+
+            }
+
+            
+
+            body {
+                font-family: 'Roboto', Arial, Verdana, sans-serif;
+                background: #e4f2fb;
+            }
+            .audio-list-container {
+                padding-bottom: 20px;
+                margin-bottom: 50px;
+            }
+            .audio-title {
+                padding-left: 0px;
+                margin-left: 0px;
+            }
+
+            .audio-list-item:hover {
+                box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.19), 0 6px 6px -10px rgba(0, 0, 0, 0.23);
+                cursor: pointer;
+                color: #0bb8c9 !important;
+            }
+
+            #audio-showcase h1 , #audio-showcase h2 , #audio-showcase h3 , #audio-showcase h4 , #audio-showcase p , #audio-showcase span{
+                color: #fff !important;
+            }
+
+            #audio-showcase h1:hover , #audio-showcase h2:hover , #audio-showcase h3:hover , #audio-showcase h4:hover , #audio-showcase p:hover , #audio-showcase span:hover{
+                color: #0bb8c9 !important;
+                cursor: pointer;
+            }
+
+            #audio-showcase h2 {
+                font-weight: 500;
+            }
+            #audio-showcase img {
+                cursor: pointer;
+                background-color: #0b0b0b;
+            }
+            #audio-showcase img:hover {
+                opacity: .5;
+            }
+            md-progress-circular path{
+                stroke: #0bb8c9 !important;
+            }
+            a {
+                text-decoration: none;
+            }
+
+            
+            .player__container {
+
+                bottom: 0px;
+
+
+
+               
+                background: #3D3A3A;
+                color: #fff !important;
+                border-radius: 0.25rem;
+                box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.19), 0 6px 6px -10px rgba(0, 0, 0, 0.23);
+            }
+
+            .shadow-depth-2 {
+                box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.19), 0 6px 6px -10px rgba(0, 0, 0, 0.23);
+
+            }
+            .body__cover {
+                position: relative;
+            }
+
+            .body__cover img {
+
+                border-radius: 0.25rem;
+            }
+
+            .list {
+                display: -webkit-box;
+                display: -ms-flexbox;
+                display: flex;
+                margin: 0;
+                padding: 0;
+                list-style-type: none;
+            }
+
+            .body__buttons,
+            .body__info,
+            .player__footer {
+                padding-right: 2rem;
+                padding-left: 2rem;
+            }
+
+            .list--cover,
+            .list--footer {
+                -webkit-box-pack: justify;
+                -ms-flex-pack: justify;
+                justify-content: space-between;
+            }
+
+            .list--header .list__link,
+            .list--footer .list__link {
+                color: #888;
+            }
+
+            .list--cover {
+                position: absolute;
+
+
+            }
+            .list--cover li:first-of-type {
+
+            }
+            .list--cover li:last-of-type {
+
+            }
+            .list--cover a {
+                font-size: 1.15rem;
+                color: #fff;
+            }
+
+          
+
+            .range-slider__range{
+                                 position: relative;
+                                 top: 14px;
+                                 right: 0;
+                                 left: 0;
+                                 margin: auto;
+                                 background: rgba(255, 255, 255, 0.95);
+                                 width: 80%;
+                                 height: 0.125rem !important;
+                                 cursor: pointer;
+                             }
+            .range-slider__range {
+                -webkit-appearance: none;
+               
+                border-radius: 5px;
+                background: #d7dcdf;
+                outline: none;
+                padding: 0;
+                margin: 0;
+            }
+            .range-slider__range::-webkit-slider-thumb {
+                -webkit-appearance: none;
+                appearance: none;
+                width: 15px;
+                height: 15px;
+                border-radius: 50%;
+                background: #fff;
+                cursor: pointer;
+                -webkit-transition: background .15s ease-in-out;
+                transition: background .15s ease-in-out;
+            }
+            .range-slider__range::-webkit-slider-thumb:hover {
+                background: #1abc9c;
+            }
+            .range-slider__range:active::-webkit-slider-thumb {
+                background: rgba(211, 3, 32, 0.95);
+            
+            }
+            .range-slider__range::-moz-range-thumb {
+                width: 20px;
+                height: 20px;
+                border: 0;
+                border-radius: 50%;
+                background: #2c3e50;
+                cursor: pointer;
+                -webkit-transition: background .15s ease-in-out;
+                transition: background .15s ease-in-out;
+            }
+            .range-slider__range::-moz-range-thumb:hover {
+                background: #1abc9c;
+            }
+            .range-slider__range:active::-moz-range-thumb {
+                background: rgba(211, 3, 32, 0.95);
+
+            }
+
+            .body__info {
+                padding-top: 10px;
+                padding-bottom: 10px;
+                text-align: center;
+            }
+
+            .info__album,
+            .info__song {
+                margin-bottom: .5rem;
+            }
+
+            .info__artist,
+            .info__album {
+                font-size: .75rem;
+                font-weight: 300;
+                color: #fff;
+            }
+
+            .info__song {
+                font-size: .75rem;
+                font-weight: 300;
+                color: #fff;
+            }
+
+            .body__buttons {
+              
+            }
+
+            .body__buttons {
+               
+            }
+
+            .list--buttons {
+                -webkit-box-align: center;
+                -ms-flex-align: center;
+                align-items: center;
+                -webkit-box-pack: center;
+                -ms-flex-pack: center;
+                justify-content: center;
+            }
+
+            .list--buttons li:nth-of-type(n+2) {
+                margin-left: 1.75rem;
+            }
+
+            .list--buttons a {
+                padding-top: .45rem;
+                padding-right: .75rem;
+                padding-bottom: .45rem;
+                padding-left: .75rem;
+                font-size: 1rem;
+                border-radius: 100%;
+                color : #eee ;
+                box-shadow: 0 6px 12px #1A1717 , 0 6px 24px #1A1717 ;
+            }
+            .list--buttons a:focus, .list--buttons a:hover {
+                color: #fff ;
+                opacity: 1;
+                box-shadow: 0 12px 18px rgba(33, 33, 33, 0.1), 0 12px 32px rgba(33, 33, 33, 0.15);
+            }
+
+            .list--buttons li:nth-of-type(2) a {
+                padding-top: .70rem;
+                padding-right: .90rem;
+                padding-bottom: .70rem;
+                padding-left: .90rem;
+               
+                font-size: .70rem;
+                color: #eee  ;
+            }
+
+            .list--buttons li:first-of-type a,
+            .list--buttons li:last-of-type a {
+                font-size: .65rem;
+                color: #eee ;
+                opacity: .5;
+            }
+            .list--buttons li:first-of-type a:focus, .list--buttons li:first-of-type a:hover,
+            .list--buttons li:last-of-type a:focus,
+            .list--buttons li:last-of-type a:hover {
+                color: #fff ;
+                opacity: .75;
+            }
+
+            .list__link {
+                -webkit-transition: all 0.25s cubic-bezier(0.4, 0, 1, 1);
+                transition: all 0.25s cubic-bezier(0.4, 0, 1, 1);
+            }
+            .list__link:focus, .list__link:hover {
+                color: #fff ;
+            }
+
+            .player__footer {
+                padding-top: 0.5rem;
+                padding-bottom: 0.5rem;
+            }
+
+            .list--footer a {
+                opacity: .5;
+            }
+            .list--footer a:focus, .list--footer a:hover {
+                opacity: .9;
+            }
+            .list {
+                padding-top: 34px;
+                
+            }
+            .body__info{
+                color: #fff;
+            }
+            .control-key {
+                border: 1px solid #ccc  ;
+            }
+            .control-key:hover , .control-key:focus {
+                border: 1px solid #fff ;
+            }
+
+            .album {
+                padding: 0px;
+            }
+
+            footer{
+                visibility: hidden;
+            }
+            .album {
+                cursor: pointer;
+                margin-bottom: 10px;
+                padding: 10px;
+                max-height: 150px !important;
+                min-height: 150px !important;
+            }
+            .album:hover {
+               opacity: .8;
+                -webkit-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+                -moz-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+                box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+                padding: 10px;
+            
+             }
+
+             .white-box {
+                 background-color: transparent;
+             }
+              #gallery-container , #page-wrapper{
+                  background-color: #292929;
+              }
+              .album-title {
+                  padding-top: 10px;
+              }
+              .album-title h4, .album-title p {
+                  color: #fff;
+                  font-weight: normal;
+              }
+              #gallery-options , #gallery-options li , #gallery-options li a  {
+                  background-color: transparent; color: #fff ;
+                  border: none;
+              }
+              
+               #gallery-options .active {
+                   border-bottom: 2px solid #aaaaaa;
+               }
+            #gallery-options .active a{
+                font-weight: bold;
+                
+            }
+            .sidebar , .top-left-part {
+                background-color: #1A1717 !important;
+            }
+
+            .sidebar ul li a , .sidebar {
+                color: #fff!important; ;
+            }
+            .sidebar ul li a:hover {
+                font-weight: bold;
+            }
+
+            .user-profile , .user-profile ul  , .user-profile ul li , .user-profile ul li a {
+                background-color: #1A1717;
+                color : #fff !important;
+            }
+            .album-avatar img 
+             {
+                box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+
+            }
+            .download-app {
+                box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+                margin-top: 80px;
+                background-color: transparent !important;
+                color: #fff  !important;
+            }
+            input[type=range] {
+                width: 70%;
+                alignment: center;
+            }
+
+        </style>
+
+
+
+
+    </div>
+
+
+<!-- /.container-fluid -->
+<footer class="footer text-center"> 2017 &copy; Subliminals &nbsp;|&nbsp; All rights reserved </footer>
+
+<!-- /#page-wrapper -->
+<!-- ============================================================== -->
+
+<!-- ============================================================== -->
+<!-- End Wrapper -->
+<!-- ============================================================== -->
+<!-- ============================================================== -->
+<!-- All Jquery -->
+<!-- ============================================================== -->
+<script src="assets/jquery.min.js"></script>
+<!-- Bootstrap Core JavaScript -->
+<script src="assets/bootstrap.min.js"></script>
+<!-- Menu Plugin JavaScript -->
+<script src="assets/sidebar-nav.min.js"></script>
+<!--slimscroll JavaScript --
+<script src="ampleadmin-minimal/js/jquery.slimscroll.js"></script>
+<!--Wave Effects --
+<script src="ampleadmin-minimal/js/waves.js"></script>
+<!--Counter js -->
+
+
+
+
+
+
+<!-- Custom Theme JavaScript --
+<script src="ampleadmin-minimal/js/custom.min.js"></script>
+
+<!-- Angularjs --
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+
+<!-- Angular Material --
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-material/1.1.4/angular-material.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-animate.min.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-aria.min.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-messages.min.js"></script>
+
+<!-- Angular Custom --
+
+<script type="text/javascript" src="js/app.js"></script>
+
+<script type="text/javascript" src="js/audioController.js"></script>
+
+
+<!--Style Switcher -->
+
+
+</body>
+
+</html>
